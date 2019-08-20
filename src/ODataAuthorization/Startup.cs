@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.OData.Builder;
+﻿using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using ODataAuthorization.GenericODataRouting;
 using ODataAuthorization.Models;
 
 namespace ODataAuthorization
@@ -28,16 +22,12 @@ namespace ODataAuthorization
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<AdventureWorksContext>();
 			services.AddOData();
 
-			services.AddMvc(options =>
-			{
-				options.EnableEndpointRouting = false;
-			})
+			services.AddDbContext<AdventureWorksContext>()
+				.AddMvc(options => { options.EnableEndpointRouting = false; })
+				.AddGenericODataRouting()
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-//			services.AddMvc()
-//				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,14 +44,13 @@ namespace ODataAuthorization
 			}
 
 			var odataModelBuilder = new ODataConventionModelBuilder(app.ApplicationServices);
-			odataModelBuilder.EntitySet<Models.Customer>("Customers");
 
 			app.UseHttpsRedirection();
 			app.UseMvc(routeBuilder =>
 			{
 				routeBuilder.EnableDependencyInjection();
 				routeBuilder.Select().Filter().Expand().MaxTop(100).OrderBy().Count();
-				
+
 				routeBuilder.MapODataServiceRoute("odata", "api", odataModelBuilder.GetEdmModel());
 			});
 		}

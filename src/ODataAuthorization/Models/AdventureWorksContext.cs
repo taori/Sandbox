@@ -21,7 +21,7 @@ namespace ODataAuthorization.Models
 
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AddressType> AddressType { get; set; }
-//        public virtual DbSet<AwbuildVersion> AwbuildVersion { get; set; }
+        public virtual DbSet<AwbuildVersion> AwbuildVersion { get; set; }
         public virtual DbSet<BillOfMaterials> BillOfMaterials { get; set; }
         public virtual DbSet<BusinessEntity> BusinessEntity { get; set; }
         public virtual DbSet<BusinessEntityAddress> BusinessEntityAddress { get; set; }
@@ -187,28 +187,28 @@ namespace ODataAuthorization.Models
                     .HasDefaultValueSql("(newid())");
             });
 
-//            modelBuilder.Entity<AwbuildVersion>(entity =>
-//            {
-//                entity.HasKey(e => e.SystemInformationId)
-//                    .HasName("PK_AWBuildVersion_SystemInformationID");
-//
-//                entity.ToTable("AWBuildVersion");
-//
-//                entity.Property(e => e.SystemInformationId)
-//                    .HasColumnName("SystemInformationID")
-//                    .ValueGeneratedOnAdd();
-//
-//                entity.Property(e => e.DatabaseVersion)
-//                    .IsRequired()
-//                    .HasColumnName("Database Version")
-//                    .HasMaxLength(25);
-//
-//                entity.Property(e => e.ModifiedDate)
-//                    .HasColumnType("datetime")
-//                    .HasDefaultValueSql("(getdate())");
-//
-//                entity.Property(e => e.VersionDate).HasColumnType("datetime");
-//            });
+            modelBuilder.Entity<AwbuildVersion>(entity =>
+            {
+                entity.HasKey(e => e.SystemInformationId)
+                    .HasName("PK_AWBuildVersion_SystemInformationID");
+
+                entity.ToTable("AWBuildVersion");
+
+                entity.Property(e => e.SystemInformationId)
+                    .HasColumnName("SystemInformationID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.DatabaseVersion)
+                    .IsRequired()
+                    .HasColumnName("Database Version")
+                    .HasMaxLength(25);
+
+                entity.Property(e => e.ModifiedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.VersionDate).HasColumnType("datetime");
+            });
 
             modelBuilder.Entity<BillOfMaterials>(entity =>
             {
