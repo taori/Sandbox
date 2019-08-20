@@ -1,6 +1,9 @@
 # Purpose of project
 The task of project is to find a good, generic way of authorizing against types and fields / type identifiers
 
+# Current State
+Authorization does not work, queries do but graphQL doesnt seem to be what i am looking for here.
+
 # Setup steps
 ## How to create the datacontext from database first
 
