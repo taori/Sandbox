@@ -36,3 +36,7 @@ https://docs.microsoft.com/de-de/ef/core/get-started/aspnetcore/existing-db
 e.g. 
 
 `Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=AdventureWorks;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models`
+
+# Links used to get started
+
+https://hackernoon.com/how-to-implement-generic-queries-by-combining-entityframework-core-and-graphql-net-77ac8faf4a22
