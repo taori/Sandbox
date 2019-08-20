@@ -1,3 +1,6 @@
+# Purpose of project
+The task of project is to find a good, generic way of authorizing against types and fields / type identifiers
+
 # Setup steps
 ## How to create the datacontext from database first
 
