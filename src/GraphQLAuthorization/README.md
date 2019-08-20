@@ -1,13 +1,13 @@
 # Setup steps
 ## How to create the datacontext from database first
 
-Download sample database from
+### Download sample database from
 https://github.com/microsoft/sql-server-samples/releases
 
-Import Database using these db commands:
+### Import Database using these db commands:
 ```
 RESTORE FILELISTONLY 
-FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SS2008\MSSQL\Backup\Northwind.bak'
+FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SS2008\MSSQL\Backup\AdventureWorks.bak'
 ```
 
 and this:
@@ -26,6 +26,7 @@ BEGIN
 END
 ```
 
+### Invoke Scaffolding
 Follow steps of documentation here:
 https://docs.microsoft.com/de-de/ef/core/get-started/aspnetcore/existing-db
 
