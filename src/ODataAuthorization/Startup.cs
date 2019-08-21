@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.OData.Builder;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +25,8 @@ namespace ODataAuthorization
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddOData();
+
+			services.AddScoped<IODataAuthorization<Address>, AddressAuthorization>();
 
 			services.AddDbContext<AdventureWorksContext>()
 				.AddMvc(options => { options.EnableEndpointRouting = false; })
@@ -53,6 +57,21 @@ namespace ODataAuthorization
 
 				routeBuilder.MapODataServiceRoute("odata", "api", odataModelBuilder.GetEdmModel());
 			});
+		}
+
+		public class AddressAuthorization : IODataAuthorization<Address>
+		{
+			/// <inheritdoc />
+			public IQueryable<Address> BatchApply(IQueryable<Address> source, IODataAuthorizationContext context)
+			{
+				return source.Where(d => d.AddressId > 500);
+			}
+
+			/// <inheritdoc />
+			public bool Apply(Address source, IODataAuthorizationContext context)
+			{
+				return source.AddressId == 600;
+			}
 		}
 	}
 }
