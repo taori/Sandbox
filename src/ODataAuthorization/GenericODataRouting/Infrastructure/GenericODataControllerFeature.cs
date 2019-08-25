@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using ODataAuthorization.Models;
 
-namespace ODataAuthorization.GenericODataRouting
+namespace ODataAuthorization.GenericODataRouting.Infrastructure
 {
 	public class GenericODataControllerFeature : IApplicationFeatureProvider<ControllerFeature>
 	{

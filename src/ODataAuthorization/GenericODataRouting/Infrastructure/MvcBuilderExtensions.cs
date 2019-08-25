@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace ODataAuthorization.GenericODataRouting
+namespace ODataAuthorization.GenericODataRouting.Infrastructure
 {
 	public static class MvcBuilderExtensions
 	{
