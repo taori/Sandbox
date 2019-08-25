@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/odata/addresses?$top=5&$skip=100",
+      "launchUrl": "api/odata/address/list?$top=5&$skip=100",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

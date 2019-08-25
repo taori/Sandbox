@@ -27,6 +27,7 @@ namespace ODataAuthorization
 			services.AddOData();
 
 			services.AddScoped<IODataAuthorization<Address>, AddressAuthorization>();
+			services.AddScoped<IODataColumnFilter<Address>, DefaultODataColumnFilter<Address>>();
 
 			services.AddDbContext<AdventureWorksContext>()
 				.AddMvc(options => { options.EnableEndpointRouting = false; })
