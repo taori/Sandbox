@@ -2,6 +2,6 @@
 {
 	public interface IODataAuthorizationContext
 	{
-		ODataAuthorizationType AuthorizationType { get; }
+		AuthorizationType AuthorizationType { get; }
 	}
 }

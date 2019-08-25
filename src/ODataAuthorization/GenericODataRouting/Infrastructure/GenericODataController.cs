@@ -70,7 +70,7 @@ namespace ODataAuthorization.GenericODataRouting.Infrastructure
 			if (!items.Any())
 				return NotFound(default);
 
-			var authorized = ApplyAuthorizations(items, ODataAuthorizationContext.FromType(ODataAuthorizationType.List));
+			var authorized = ApplyAuthorizations(items, ODataAuthorizationContext.FromType(AuthorizationType.List));
 			if (!authorized.Any())
 				return NotFound(default);
 
@@ -84,7 +84,7 @@ namespace ODataAuthorization.GenericODataRouting.Infrastructure
 			if (entity == null)
 				return NotFound(default);
 
-			if (ApplyAuthorization(entity, ODataAuthorizationContext.FromType(ODataAuthorizationType.GetById)) == default)
+			if (ApplyAuthorization(entity, ODataAuthorizationContext.FromType(AuthorizationType.GetById)) == default)
 				return Unauthorized();
 
 			return ApplyColumnFilter(entity);

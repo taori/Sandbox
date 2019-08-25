@@ -1,6 +1,6 @@
 ﻿namespace ODataAuthorization.GenericODataRouting.Authorization
 {
-	public enum ODataAuthorizationType
+	public enum AuthorizationType
 	{
 		List,
 		GetById,
