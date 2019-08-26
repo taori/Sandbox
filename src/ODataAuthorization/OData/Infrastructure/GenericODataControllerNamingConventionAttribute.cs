@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace ODataAuthorization.GenericODataRouting.Infrastructure
+namespace ODataAuthorization.OData.Infrastructure
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 	public class GenericODataControllerNamingConventionAttribute : Attribute, IControllerModelConvention

@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ODataAuthorization.GenericODataRouting;
-using ODataAuthorization.GenericODataRouting.Authorization;
-using ODataAuthorization.GenericODataRouting.ColumnFiltering;
-using ODataAuthorization.GenericODataRouting.Infrastructure;
 using ODataAuthorization.Models;
+using ODataAuthorization.OData.Authorization;
+using ODataAuthorization.OData.ColumnFilter;
+using ODataAuthorization.OData.Infrastructure;
 
 namespace ODataAuthorization
 {
@@ -29,15 +28,14 @@ namespace ODataAuthorization
 		{
 			services.AddOData();
 
-			services.AddScoped<IODataColumnFilterFactory, DefaultColumnFilterFactory>();
-			services.AddScoped<IODataAuthorization<Address>, AddressAuthorization>();
-			services.AddScoped<IODataColumnWhitelist<Address>, AddressWhitelist1>();
-			services.AddScoped<IODataColumnWhitelist<Address>, AddressWhitelist2>();
-			services.AddScoped<IODataColumnBlacklist<Address>, AddressBlacklist1>();
+			services.AddScoped<IEntityAuthorization, AddressEntityAuthorization>();
+			services.AddScoped<IWhitelist, AddressWhitelist1>();
+			services.AddScoped<IWhitelist, AddressWhitelist2>();
+			services.AddScoped<IBlacklist, AddressBlacklist1>();
 
 			services.AddDbContext<AdventureWorksContext>()
 				.AddMvc(options => { options.EnableEndpointRouting = false; })
-				.AddGenericODataRouting()
+				.AddGenericODataApi()
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
@@ -67,22 +65,22 @@ namespace ODataAuthorization
 		}
 	}
 
-	public class AddressAuthorization : IODataAuthorization<Address>
+	public class AddressEntityAuthorization : IEntityAuthorization<Address>
 	{
 		/// <inheritdoc />
-		public IQueryable<Address> BatchApply(IQueryable<Address> source, IODataAuthorizationContext context)
+		public IQueryable<Address> BatchApply(IQueryable<Address> source, IAuthorizationContext context)
 		{
 			return source.Where(d => d.AddressId > 500);
 		}
 
 		/// <inheritdoc />
-		public bool Apply(Address source, IODataAuthorizationContext context)
+		public bool Apply(Address source, IAuthorizationContext context)
 		{
 			return source.AddressId == 600;
 		}
 	}
 
-	public class AddressWhitelist1 : IODataColumnWhitelist<Address>
+	public class AddressWhitelist1 : IWhitelist<Address>
 	{
 		/// <inheritdoc />
 		public IEnumerable<string> GetPropertyNames()
@@ -93,7 +91,7 @@ namespace ODataAuthorization
 		}
 	}
 
-	public class AddressBlacklist1 : IODataColumnBlacklist<Address>
+	public class AddressBlacklist1 : IBlacklist<Address>
 	{
 		/// <inheritdoc />
 		public IEnumerable<string> GetPropertyNames()
@@ -102,7 +100,7 @@ namespace ODataAuthorization
 		}
 	}
 
-	public class AddressWhitelist2 : IODataColumnWhitelist<Address>
+	public class AddressWhitelist2 : IWhitelist<Address>
 	{
 		/// <inheritdoc />
 		public IEnumerable<string> GetPropertyNames()
