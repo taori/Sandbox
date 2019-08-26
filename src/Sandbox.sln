@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLAuthorization", "GraphQLAuthorization\GraphQLAuthorization.csproj", "{958FBAE6-8970-4A4A-85C2-FA5C3B35BCF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLAuthorization", "GraphQLAuthorization\GraphQLAuthorization.csproj", "{958FBAE6-8970-4A4A-85C2-FA5C3B35BCF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODataAuthorization", "ODataAuthorization\ODataAuthorization.csproj", "{1E07B7C6-F878-4DC0-A454-06EDFA1BD7AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODataAuthorization", "ODataAuthorization\ODataAuthorization.csproj", "{1E07B7C6-F878-4DC0-A454-06EDFA1BD7AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposableWebApplication", "ComposableWebApplication\ComposableWebApplication.csproj", "{618B9C61-C73B-4F60-ACEE-64A7DD9EE3A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposableWebApplication.Plugin1", "ComposableWebApplication.Plugin1\ComposableWebApplication.Plugin1.csproj", "{5305A118-B05C-479B-A1CD-D1E681DFF401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposableWebApplication.Plugin2", "ComposableWebApplication.Plugin2\ComposableWebApplication.Plugin2.csproj", "{47316E1C-4936-4A7E-9CA6-B36D259B2F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposableWebApplication.SDK.Core", "ComposableWebApplication.SDK.Core\ComposableWebApplication.SDK.Core.csproj", "{2D6EC134-517C-4A8B-A44F-12E7BB72DF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposableWebApplication.SDK.Web", "ComposableWebApplication.SDK.Web\ComposableWebApplication.SDK.Web.csproj", "{71DFE626-886C-4B26-84BD-7AE5BA1128A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +31,26 @@ Global
 		{1E07B7C6-F878-4DC0-A454-06EDFA1BD7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E07B7C6-F878-4DC0-A454-06EDFA1BD7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E07B7C6-F878-4DC0-A454-06EDFA1BD7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{618B9C61-C73B-4F60-ACEE-64A7DD9EE3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{618B9C61-C73B-4F60-ACEE-64A7DD9EE3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{618B9C61-C73B-4F60-ACEE-64A7DD9EE3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{618B9C61-C73B-4F60-ACEE-64A7DD9EE3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5305A118-B05C-479B-A1CD-D1E681DFF401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5305A118-B05C-479B-A1CD-D1E681DFF401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5305A118-B05C-479B-A1CD-D1E681DFF401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5305A118-B05C-479B-A1CD-D1E681DFF401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47316E1C-4936-4A7E-9CA6-B36D259B2F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47316E1C-4936-4A7E-9CA6-B36D259B2F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47316E1C-4936-4A7E-9CA6-B36D259B2F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47316E1C-4936-4A7E-9CA6-B36D259B2F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6EC134-517C-4A8B-A44F-12E7BB72DF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6EC134-517C-4A8B-A44F-12E7BB72DF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6EC134-517C-4A8B-A44F-12E7BB72DF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6EC134-517C-4A8B-A44F-12E7BB72DF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71DFE626-886C-4B26-84BD-7AE5BA1128A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71DFE626-886C-4B26-84BD-7AE5BA1128A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71DFE626-886C-4B26-84BD-7AE5BA1128A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71DFE626-886C-4B26-84BD-7AE5BA1128A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
