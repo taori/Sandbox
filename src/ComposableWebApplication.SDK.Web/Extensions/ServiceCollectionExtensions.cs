@@ -1,9 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using ComposableWebApplication.SDK.Core;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using ComposableWebApplication.SDK.Web.Utility;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ComposableWebApplication.SDK.Web.Extensions
@@ -12,7 +11,7 @@ namespace ComposableWebApplication.SDK.Web.Extensions
 	{
 		public static IServiceCollection AddPluginFolder(this IServiceCollection source, string path)
 		{
-			var assemblyPaths = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
+			var assemblyPaths = PluginDirectory.GetAssemblyPaths(path);
 			foreach (var assemblyPath in assemblyPaths)
 			{
 				var assembly = Assembly.LoadFile(assemblyPath);
@@ -23,20 +22,6 @@ namespace ComposableWebApplication.SDK.Web.Extensions
 					source.AddSingleton(feature);
 					feature.Register(source);
 				}
-			}
-
-			return source;
-		}
-	}
-
-	public static class MvcBuilderExtensions
-	{
-		public static IMvcBuilder AddPluginControllers(this IMvcBuilder source, string path)
-		{
-			var assemblyPaths = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
-			foreach (var assemblyPath in assemblyPaths)
-			{
-				source.PartManager.ApplicationParts.Add(new AssemblyPart(Assembly.LoadFile(assemblyPath)));
 			}
 
 			return source;

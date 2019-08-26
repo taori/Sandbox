@@ -15,12 +15,4 @@ namespace ComposableWebApplication.Plugin1
 		{
 		}
 	}
-
-	public class Feature1Controller : Controller
-	{
-		public IActionResult Index()
-		{
-			return Ok("Hello from feature 1");
-		}
-	}
 }
