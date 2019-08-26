@@ -12,5 +12,8 @@ namespace ODataAuthorization.OData.Authorization
 		bool Apply(TEntity source, IAuthorizationContext context);
 	}
 
+	/// <summary>
+	/// Marker interface - use <see cref="IEntityAuthorization{TEntity}"/> for actual implementations
+	/// </summary>
 	public interface IEntityAuthorization { }
 }

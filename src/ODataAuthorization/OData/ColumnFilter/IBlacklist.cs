@@ -12,10 +12,9 @@ namespace ODataAuthorization.OData.ColumnFilter
 	}
 
 	/// <summary>
-	/// A column blacklist can be implemented multiple times and restricts the properties which can be rendered into a OData request.
+	/// Marker interface - use <see cref="IBlacklist{TEntity}"/> for actual implementations
 	/// </summary>
 	public interface IBlacklist
 	{
-		IEnumerable<string> GetPropertyNames();
 	}
 }
