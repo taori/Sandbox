@@ -74,7 +74,7 @@ namespace ODataAuthorization
 		}
 
 		/// <inheritdoc />
-		public bool Apply(Address source, IAuthorizationContext context)
+		public bool IsAuthorized(Address source, IAuthorizationContext context)
 		{
 			return source.AddressId == 600;
 		}

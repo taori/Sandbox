@@ -9,7 +9,7 @@ namespace ODataAuthorization.OData.Authorization
 	public interface IEntityAuthorization<TEntity> : IEntityAuthorization
 	{
 		IQueryable<TEntity> BatchApply(IQueryable<TEntity> source, IAuthorizationContext context);
-		bool Apply(TEntity source, IAuthorizationContext context);
+		bool IsAuthorized(TEntity source, IAuthorizationContext context);
 	}
 
 	/// <summary>

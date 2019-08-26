@@ -28,7 +28,7 @@ namespace ODataAuthorization.OData.Authorization
 		public TEntity Authorize<TEntity>(TEntity item, IAuthorizationContext context)
 		{
 			var authorizations = AuthorizationFactory.Create<TEntity>().ToImmutableArray();
-			return (authorizations.Length == 0 || authorizations.All(d => d.Apply(item, context))) ? item : default;
+			return (authorizations.Length == 0 || authorizations.All(d => d.IsAuthorized(item, context))) ? item : default;
 		}
 	}
 }
