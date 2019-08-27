@@ -1,0 +1,61 @@
+﻿@page "/fetchdata"
+
+@using ComposableWebApplication.Blazor.Data
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast state @LastLoadDate.ToString("O")</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+<button @onmouseup="UpdateWeatherAsync">Update data</button>
+
+@if (forecasts == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Temp. (C)</th>
+				<th>Temp. (F)</th>
+				<th>Summary</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var forecast in forecasts)
+			{
+				<tr @key="@forecast.Date">
+					<td>@forecast.Date.ToShortDateString()</td>
+					<td>@forecast.TemperatureC</td>
+					<td>@forecast.TemperatureF</td>
+					<td>@forecast.Summary</td>
+					<td><button @onmouseup="@(e => RemoveWeather(forecast))">remove</button></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	List<WeatherForecast> forecasts;
+	DateTime LastLoadDate = DateTime.MinValue;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await UpdateWeatherAsync();
+	}
+
+	private async Task UpdateWeatherAsync()
+	{
+		forecasts = (await ForecastService.GetForecastAsync(DateTime.Now)).ToList();
+		LastLoadDate = DateTime.Now;
+	}
+
+	private void RemoveWeather(WeatherForecast item)
+	{
+		forecasts = forecasts.Where(d => !d.Equals(item)).ToList();
+	}
+}

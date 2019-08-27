@@ -1,0 +1,10 @@
+﻿@page "/isthisreallife/{someMessage}"
+<div class="my-component">
+    This Blazor component is defined in the <strong>RazorClassLibrary-CSharp</strong> package. @SomeMessage
+</div>
+
+@code {
+
+	[Parameter]
+	public string SomeMessage { get; set; }
+}

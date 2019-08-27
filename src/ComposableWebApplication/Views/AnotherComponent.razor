@@ -1,0 +1,19 @@
+﻿ @page "/Standalone"
+<h3>AnotherComponent</h3>
+
+<h2>@MyProperty</h2>
+<div>
+	<input type="text" @bind="MyProperty" />
+	<button @onclick="@SomeMethod">Execute some method</button>
+</div>
+
+Hello from AnotherComponent
+@code {
+	[Parameter]
+	public string MyProperty { get; set; } = "Default";
+
+	private void SomeMethod()
+	{
+		MyProperty = "Updated value?";
+	}
+}

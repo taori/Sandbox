@@ -36,12 +36,16 @@ namespace ComposableWebApplication
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
+			services.AddServerSideBlazor();
 
 			var pluginRoot = Path.Combine(HostingEnvironment.ContentRootPath, "Plugins");
 
 			services
 				.AddPluginFolder(pluginRoot)
-				.AddMvc()
+				.AddMvc(p =>
+				{
+					p.EnableEndpointRouting = false;
+				})
 				.AddPluginControllers(pluginRoot)
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
