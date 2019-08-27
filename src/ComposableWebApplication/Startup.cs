@@ -5,13 +5,16 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using ComposableWebApplication.SDK.Web.Extensions;
+using ComposableWebApplication.SDK.Web.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace ComposableWebApplication
 {
@@ -40,9 +43,8 @@ namespace ComposableWebApplication
 			var pluginRoot = Path.Combine(HostingEnvironment.ContentRootPath, "Plugins");
 
 			services
-				.AddPluginFolder(pluginRoot)
 				.AddMvc()
-				.AddPluginControllers(pluginRoot)
+				.AddPlugins(pluginRoot)
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
