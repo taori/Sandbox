@@ -1,6 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using ComposableWebApplication.SDK.Web.Utility;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ComposableWebApplication.SDK.Web.Extensions

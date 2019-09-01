@@ -11,7 +11,7 @@
 *.sln.docstates
 
 Plugins/
-src/**/Plugins/*
+Plugins/**/*
 *.dll
 
 # User-specific files (MonoDevelop/Xamarin Studio)
