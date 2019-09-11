@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "2bef722a9053aee76f7ac8ebe1a0df5982ac87ad"
+    "signature": "2b03b3ebc1fcc97d6966b16f00a95e4b400da07e"
   },
   "compilationOptions": {
     "defines": [
@@ -1260,6 +1260,14 @@
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.dll": {}
         }
       },
+      "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        }
+      },
       "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
@@ -2121,8 +2129,10 @@
       "ComposableWebApplication.SDK.Web/1.0.0": {
         "dependencies": {
           "ComposableWebApplication.SDK.Core": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.2.0",
-          "Microsoft.Extensions.DependencyInjection": "2.2.0"
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Razor": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.2.0"
         },
         "compile": {
           "ComposableWebApplication.SDK.Web.dll": {}
@@ -2954,6 +2964,17 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18315"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.0.18315"
           }
@@ -4065,8 +4086,10 @@
       "ComposableWebApplication.SDK.Web/1.0.0": {
         "dependencies": {
           "ComposableWebApplication.SDK.Core": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.2.0",
-          "Microsoft.Extensions.DependencyInjection": "2.2.0"
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Razor": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.2.0"
         },
         "runtime": {
           "ComposableWebApplication.SDK.Web.dll": {}
@@ -4464,6 +4487,13 @@
       "sha512": "sha512-ztUs3ENypYt7tBh2hS1Vaq0kaJ3AoA6FERfFvK9chdQtk3KW7PfcDsJ14/q6JsEiPhLdtM8x1Afod+dNfaD3iA==",
       "path": "microsoft.extensions.fileproviders.composite/2.2.0",
       "hashPath": "microsoft.extensions.fileproviders.composite.2.2.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I4J9TrLvL9LiC02ZXcqGXrDXwhtvAEe6V19DpWFrgEw5OxIVpxd4HXr7oOGHUkfC1NTaohGI9Uzble2BV+sUPQ==",
+      "path": "microsoft.extensions.fileproviders.embedded/2.2.0",
+      "hashPath": "microsoft.extensions.fileproviders.embedded.2.2.0.nupkg.sha512"
     },
     "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
       "type": "package",
