@@ -13,7 +13,7 @@ namespace ComposableWebApplication.SDK.Web.Extensions
 {
 	public static class MvcBuilderExtensions
 	{
-		public static IMvcBuilder AddPlugins(this IMvcBuilder source, string path, Dictionary<string, Assembly> assemblyPaths)
+		public static IMvcBuilder AddPlugins(this IMvcBuilder source, Dictionary<string, Assembly> assemblyPaths)
 		{
 			source.ConfigureApplicationPartManager(manager =>
 			{

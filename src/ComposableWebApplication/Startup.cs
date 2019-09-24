@@ -41,13 +41,14 @@ namespace ComposableWebApplication
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
+			services.AddRazorPages();
 
 			var pluginRoot = Path.Combine(HostingEnvironment.ContentRootPath, "Plugins");
 
 			var assemblyPaths = PluginDirectory.GetAssemblyPaths(pluginRoot).ToDictionary(d => d, AssemblyLoadContext.Default.LoadFromAssemblyPath);
 			services
 				.AddControllersWithViews()
-				.AddPlugins(pluginRoot, assemblyPaths)
+				.AddPlugins(assemblyPaths)
 				.AddRazorRuntimeCompilation(config =>
 				{
 					foreach (var assemblyPath in assemblyPaths.Keys)
@@ -82,6 +83,8 @@ namespace ComposableWebApplication
 			app.UseCookiePolicy();
 			app.UseEndpoints(d =>
 			{
+				d.MapRazorPages();
+
 				d.MapControllerRoute(
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id?}");
