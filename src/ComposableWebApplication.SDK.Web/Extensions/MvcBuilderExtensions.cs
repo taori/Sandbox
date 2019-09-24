@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ComposableWebApplication.SDK.Core;
@@ -12,10 +13,8 @@ namespace ComposableWebApplication.SDK.Web.Extensions
 {
 	public static class MvcBuilderExtensions
 	{
-		public static IMvcBuilder AddPlugins(this IMvcBuilder source, string path)
+		public static IMvcBuilder AddPlugins(this IMvcBuilder source, string path, Dictionary<string, Assembly> assemblyPaths)
 		{
-			var assemblyPaths = PluginDirectory.GetAssemblyPaths(path).ToDictionary(d => d, Assembly.LoadFile);
-
 			source.ConfigureApplicationPartManager(manager =>
 			{
 				foreach (var assemblyPath in assemblyPaths)
@@ -29,7 +28,7 @@ namespace ComposableWebApplication.SDK.Web.Extensions
 						manager.ApplicationParts.Add(new AssemblyPart(assemblyPath.Value));
 					}
 
-					var featureTypes = assemblyPath.Value.ExportedTypes.Where(d => typeof(IFeature).IsAssignableFrom(d));
+					var featureTypes = assemblyPath.Value.ExportedTypes.Where(d => !d.IsInterface && typeof(IFeature).IsAssignableFrom(d));
 					foreach (var featureType in featureTypes)
 					{
 						var feature = Activator.CreateInstance(featureType) as IFeature;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Threading.Tasks;
 using ComposableWebApplication.SDK.Web.Extensions;
 using ComposableWebApplication.SDK.Web.Utility;
@@ -42,10 +43,11 @@ namespace ComposableWebApplication
 
 			var pluginRoot = Path.Combine(HostingEnvironment.ContentRootPath, "Plugins");
 
+			var assemblyPaths = PluginDirectory.GetAssemblyPaths(pluginRoot).ToDictionary(d => d, AssemblyLoadContext.Default.LoadFromAssemblyPath);
 			services
-				.AddMvc()
-				.AddPlugins(pluginRoot)
-				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+				.AddMvc(
+					options => options.EnableEndpointRouting = false)
+				.AddPlugins(pluginRoot, assemblyPaths);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +64,7 @@ namespace ComposableWebApplication
 				app.UseHsts();
 			}
 
-			app.UseHttpsRedirection();
+//			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
 
