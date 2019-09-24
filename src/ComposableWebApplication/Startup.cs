@@ -16,12 +16,13 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Primitives;
 
 namespace ComposableWebApplication
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+		public Startup(IConfiguration configuration, IWebHostEnvironment hostingEnvironment)
 		{
 			Configuration = configuration;
 			HostingEnvironment = hostingEnvironment;
@@ -29,7 +30,7 @@ namespace ComposableWebApplication
 
 		public IConfiguration Configuration { get; }
 
-		public IHostingEnvironment HostingEnvironment { get; }
+		public IWebHostEnvironment HostingEnvironment { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -45,10 +46,21 @@ namespace ComposableWebApplication
 
 			var assemblyPaths = PluginDirectory.GetAssemblyPaths(pluginRoot).ToDictionary(d => d, AssemblyLoadContext.Default.LoadFromAssemblyPath);
 			services
-				.AddMvc(
-					options => options.EnableEndpointRouting = false)
-				.AddPlugins(pluginRoot, assemblyPaths);
+				.AddControllersWithViews()
+				.AddPlugins(pluginRoot, assemblyPaths)
+				.AddRazorRuntimeCompilation(config =>
+				{
+					foreach (var assemblyPath in assemblyPaths.Keys)
+					{
+						config.AdditionalReferencePaths.Add(assemblyPath);
+					}
+
+					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin1"));
+					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin2"));
+					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin3"));
+				});
 		}
+
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -65,14 +77,14 @@ namespace ComposableWebApplication
 			}
 
 //			app.UseHttpsRedirection();
+			app.UseRouting();
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
-
-			app.UseMvc(routes =>
+			app.UseEndpoints(d =>
 			{
-				routes.MapRoute(
+				d.MapControllerRoute(
 					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
+					pattern: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}
