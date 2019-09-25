@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,7 @@ namespace ComposableWebApplication
 			var pluginRoot = Path.Combine(HostingEnvironment.ContentRootPath, "Plugins");
 
 			var assemblyPaths = PluginDirectory.GetAssemblyPaths(pluginRoot).ToDictionary(d => d, AssemblyLoadContext.Default.LoadFromAssemblyPath);
+
 			services
 				.AddControllersWithViews()
 				.AddPlugins(assemblyPaths)
