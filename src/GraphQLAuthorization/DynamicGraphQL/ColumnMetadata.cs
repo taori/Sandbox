@@ -18,6 +18,7 @@ namespace GraphQLAuthorization.DynamicGraphQL
 	public class ColumnMetadata
 	{
 		public string ColumnName { get; set; }
+
 		public string DataType { get; set; }
 	}
 
@@ -267,7 +268,6 @@ namespace GraphQLAuthorization.DynamicGraphQL
 			var queryable = _dbContext.Query(_tableMetadata.AssemblyFullName);
 			if (context.FieldName.Contains("_list"))
 			{
-
 				var first = context.Arguments["first"] != null ?
 					context.GetArgument("first", int.MaxValue) :
 					int.MaxValue;

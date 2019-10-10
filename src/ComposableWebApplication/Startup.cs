@@ -56,6 +56,9 @@ namespace ComposableWebApplication
 						config.AdditionalReferencePaths.Add(assemblyPath);
 					}
 
+					AssemblyLoadContext.Default.LoadFromAssemblyPath(@"D:\GitHub\Sandbox\src\ComposableWebApplication\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll");
+					config.AdditionalReferencePaths.Add(@"D:\GitHub\Sandbox\src\ComposableWebApplication\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll");
+
 					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin1"));
 					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin2"));
 					config.FileProviders.Add(new PhysicalFileProvider(@"D:\GitHub\Sandbox\src\ComposableWebApplication.Plugin3"));
