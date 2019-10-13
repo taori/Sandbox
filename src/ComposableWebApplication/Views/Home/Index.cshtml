@@ -1,10 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Routing
+@{
 	ViewData["Title"] = "Home Page";
 }
+@inject LinkGenerator LinkGenerator
 
 <div class="text-center">
 	<h1 class="display-4">Welcome</h1>
 	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<p><a href="@LinkGenerator.GetUriByPage( Context,"/MyFeature/Page1")">Module 3 - Page 1</a></p>
+	<p><a href="@LinkGenerator.GetUriByPage(Context,"/LocalPage")">Local Site - LocalPage</a></p>
 </div>
-asdsadadsasds
-asdasdsasaddasdasdasdasd asd asasd
