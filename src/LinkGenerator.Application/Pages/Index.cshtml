@@ -5,6 +5,7 @@
 	ViewData["Title"] = "Home page";
 }
 @inject LinkGenerator LinkGenerator
+@inject IUrlHelper UrlHelper
 
 <style type="text/css">
 	a.localLink {
@@ -33,27 +34,27 @@
 		</tr>
 
 		<tr>
+			<td>local area</td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "LocalAreaPage", values: new {area = "Local"})">LocalAreaPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "LocalAreaPage", values: new {area = "Local"})">LocalAreaPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/LocalAreaPage", values: new {area = "Local"})">LocalAreaPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/LocalAreaPage", values: new {area = "Local"})">LocalAreaPage</a></td>
+		</tr>
+
+		<tr>
 			<td>referenced</td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "MyFeature/ReferencedPage")">ReferencedPage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "MyFeature/ReferencedPage")">ReferencedPage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/MyFeature/ReferencedPage")">ReferencedPage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/MyFeature/ReferencedPage")">ReferencedPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "ReferencedPage", values: new {area = "MyFeature"})">ReferencedPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "ReferencedPage", values: new {area = "MyFeature"})">ReferencedPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/ReferencedPage", values: new {area = "MyFeature"})">ReferencedPage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/ReferencedPage", values: new {area = "MyFeature"})">ReferencedPage</a></td>
 		</tr>
 
 		<tr>
 			<td>runtime</td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-		</tr>
-
-		<tr>
-			<td>manual</td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
-			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/Areas/MyFeature/RuntimePage")">RuntimePage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "RuntimePage", values: new {area = "MyFeature"})">RuntimePage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "RuntimePage", values: new {area = "MyFeature"})">RuntimePage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetUriByPage(HttpContext, "/RuntimePage", values: new {area = "MyFeature"})">RuntimePage</a></td>
+			<td><a class="localLink" href="@LinkGenerator.GetPathByPage(HttpContext, "/RuntimePage", values: new {area = "MyFeature"})">RuntimePage</a></td>
 		</tr>
 	</table>
 	

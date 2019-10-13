@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComposableWebApplication.SD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComposableWebApplication.Plugin3", "ComposableWebApplication.Plugin3\ComposableWebApplication.Plugin3.csproj", "{B30211AA-74C0-40C0-BF80-5CA731B390B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkGenerator.Application", "LinkGenerator.Application\LinkGenerator.Application.csproj", "{941E838E-0E76-4505-80C0-542BA52BDFC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkGenerator.Application", "LinkGenerator.Application\LinkGenerator.Application.csproj", "{941E838E-0E76-4505-80C0-542BA52BDFC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkGenerator.ReferencedProject", "LinkGenerator.ReferencedProject\LinkGenerator.ReferencedProject.csproj", "{0127DD82-62B9-41DF-83D1-DFF945B60006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkGenerator.ReferencedProject", "LinkGenerator.ReferencedProject\LinkGenerator.ReferencedProject.csproj", "{0127DD82-62B9-41DF-83D1-DFF945B60006}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkGenerator.RuntimeLoadedProject", "LinkGenerator.RuntimeLoadedProject\LinkGenerator.RuntimeLoadedProject.csproj", "{0D276065-8F81-43EF-BF1B-0DAD0B46EFF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkGenerator.RuntimeLoadedProject", "LinkGenerator.RuntimeLoadedProject\LinkGenerator.RuntimeLoadedProject.csproj", "{0D276065-8F81-43EF-BF1B-0DAD0B46EFF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
