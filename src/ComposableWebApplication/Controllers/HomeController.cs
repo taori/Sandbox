@@ -18,6 +18,18 @@ namespace ComposableWebApplication.Controllers
 			return View();
 		}
 
+		[Route("[controller]/[action]/{now:dateTimeOffset}")]
+		public IActionResult DateTimeOffsetConstraint(DateTimeOffset now)
+		{
+			return View(now);
+		}
+
+		[Route("[controller]/[action]/{now:dateTime}")]
+		public IActionResult DateTimeConstraint(DateTime now)
+		{
+			return View(now);
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

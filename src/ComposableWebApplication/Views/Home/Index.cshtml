@@ -1,8 +1,11 @@
-﻿@{
+﻿@using System.Web
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Learn about <a href="/Home/DateTimeOffsetConstraint/@Uri.EscapeDataString(DateTimeOffset.Now.ToString("O"))">DateTimeOffset constraint</a>.</p>
+    <p>Learn about <a href="/Home/DateTimeConstraint/@Uri.EscapeDataString(DateTime.Now.ToString("O"))">DateTime constraint</a>.</p>
 </div>
