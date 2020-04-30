@@ -66,8 +66,8 @@ namespace ImpersonationSystemService.WindowsApi
             ProcessInformation pi = new ProcessInformation();
             SecurityAttributes saProcess = new SecurityAttributes();
             SecurityAttributes saThread = new SecurityAttributes();
-            saProcess.nLength = (uint)Marshal.SizeOf(saProcess);
-            saThread.nLength = (uint)Marshal.SizeOf(saThread);
+            saProcess.Length = (uint)Marshal.SizeOf(saProcess);
+            saThread.Length = (uint)Marshal.SizeOf(saThread);
 
             StartupInfo si = new StartupInfo();
             si.cb = (uint)Marshal.SizeOf(si);
@@ -132,7 +132,7 @@ namespace ImpersonationSystemService.WindowsApi
             if (retVal == true)
             {
                 SecurityAttributes sa = new SecurityAttributes();
-                sa.nLength = (uint)Marshal.SizeOf(sa);
+                sa.Length = (uint)Marshal.SizeOf(sa);
 
                 //Convert the impersonation token into Primary token
                 retVal = DuplicateTokenEx(

@@ -6,9 +6,9 @@ namespace ImpersonationSystemService.WindowsApi
     [StructLayout(LayoutKind.Sequential)]
     internal struct ProcessInformation
     {
-        public IntPtr hProcess;
-        public IntPtr hThread;
-        public uint dwProcessId;
-        public uint dwThreadId;
+        public IntPtr ProcessHandle;
+        public IntPtr ThreadHandle;
+        public uint ProcessId;
+        public uint ThreadId;
     }
 }

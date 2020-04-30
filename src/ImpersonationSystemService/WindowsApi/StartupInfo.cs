@@ -24,6 +24,5 @@ namespace ImpersonationSystemService.WindowsApi
         public IntPtr hStdInput;
         public IntPtr hStdOutput;
         public IntPtr hStdError;
-
     }
 }
