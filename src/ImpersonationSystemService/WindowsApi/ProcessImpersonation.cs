@@ -26,7 +26,7 @@ namespace ImpersonationSystemService.WindowsApi
         /// <returns></returns>
         public static bool Launch(string command, int processId)
         {
-            bool ret = false;
+            bool success = false;
 
             //Either specify the processID explicitly
             //Or try to get it from a process owned by the user.
@@ -37,20 +37,19 @@ namespace ImpersonationSystemService.WindowsApi
 
             if (processId > 1)
             {
-                IntPtr token = NativeMethods.GetPrimaryToken(processId);
-
-                if (token != IntPtr.Zero)
+                var processToken = NativeMethods.GetPrimaryToken(processId);
+                if (processToken != IntPtr.Zero)
                 {
-                    IntPtr envBlock = NativeMethods.GetEnvironmentBlock(token);
-                    ret = NativeMethods.LaunchProcessAsUser(command, token, envBlock);
-                    if (envBlock != IntPtr.Zero)
-                        NativeMethods.DestroyEnvironmentBlock(envBlock);
+                    var environmentHandle = NativeMethods.GetEnvironmentBlock(processToken);
+                    success = NativeMethods.LaunchProcessAsUser(command, processToken, environmentHandle);
+                    if (environmentHandle != IntPtr.Zero)
+                        NativeMethods.DestroyEnvironmentBlock(environmentHandle);
 
-                    NativeMethods.CloseHandle(token);
+                    NativeMethods.CloseHandle(processToken);
                 }
             }
 
-            return ret;
+            return success;
         }
 
         private static int GetExplorerProcessId()
