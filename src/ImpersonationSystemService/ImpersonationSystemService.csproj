@@ -50,7 +50,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsApi\ProcessAsUser.cs" />
+    <Compile Include="WindowsApi\NativeMethods.cs" />
+    <Compile Include="WindowsApi\ProcessImpersonation.cs" />
     <Compile Include="WindowsApi\ProcessInformation.cs" />
     <Compile Include="WindowsApi\SecurityAttributes.cs" />
     <Compile Include="WindowsApi\SecurityImpersonationLevel.cs" />

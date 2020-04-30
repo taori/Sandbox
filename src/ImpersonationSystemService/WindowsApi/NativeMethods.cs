@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace ImpersonationSystemService.WindowsApi
 {
-    // https://social.msdn.microsoft.com/Forums/vstudio/en-US/0c0ca087-5e7b-4046-93cb-c7b3e48d0dfb/how-run-client-application-as-a-windows-service-in-c?forum=csharpgeneral
-
-    public class ProcessAsUser
+    internal static class NativeMethods
     {
         [DllImport("advapi32.dll", SetLastError = true)]
-        private static extern bool CreateProcessAsUser(
+        internal static extern bool CreateProcessAsUser(
             IntPtr hToken,
             string lpApplicationName,
             string lpCommandLine,
@@ -24,7 +21,7 @@ namespace ImpersonationSystemService.WindowsApi
             out ProcessInformation lpProcessInformation);
 
         [DllImport("advapi32.dll", EntryPoint = "DuplicateTokenEx", SetLastError = true)]
-        private static extern bool DuplicateTokenEx(
+        internal static extern bool DuplicateTokenEx(
             IntPtr hExistingToken,
             uint dwDesiredAccess,
             ref SecurityAttributes lpThreadAttributes,
@@ -34,23 +31,23 @@ namespace ImpersonationSystemService.WindowsApi
 
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        private static extern bool OpenProcessToken(
+        internal static extern bool OpenProcessToken(
             IntPtr ProcessHandle,
             uint DesiredAccess,
             ref IntPtr TokenHandle);
 
         [DllImport("userenv.dll", SetLastError = true)]
-        private static extern bool CreateEnvironmentBlock(
+        internal static extern bool CreateEnvironmentBlock(
             ref IntPtr lpEnvironment,
             IntPtr hToken,
             bool bInherit);
 
         [DllImport("userenv.dll", SetLastError = true)]
-        private static extern bool DestroyEnvironmentBlock(
+        internal static extern bool DestroyEnvironmentBlock(
             IntPtr lpEnvironment);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool CloseHandle(
+        internal static extern bool CloseHandle(
             IntPtr hObject);
 
         private const short SW_SHOW = 5;
@@ -62,18 +59,18 @@ namespace ImpersonationSystemService.WindowsApi
         private const int STARTF_FORCEONFEEDBACK = 0x00000040;
         private const uint CREATE_UNICODE_ENVIRONMENT = 0x00000400;
 
-        private static bool LaunchProcessAsUser(string cmdLine, IntPtr token, IntPtr envBlock)
+        internal static bool LaunchProcessAsUser(string cmdLine, IntPtr token, IntPtr envBlock)
         {
             bool result = false;
 
             ProcessInformation pi = new ProcessInformation();
             SecurityAttributes saProcess = new SecurityAttributes();
             SecurityAttributes saThread = new SecurityAttributes();
-            saProcess.nLength = (uint) Marshal.SizeOf(saProcess);
-            saThread.nLength = (uint) Marshal.SizeOf(saThread);
+            saProcess.nLength = (uint)Marshal.SizeOf(saProcess);
+            saThread.nLength = (uint)Marshal.SizeOf(saThread);
 
             StartupInfo si = new StartupInfo();
-            si.cb = (uint) Marshal.SizeOf(si);
+            si.cb = (uint)Marshal.SizeOf(si);
 
             //if this member is NULL, the new process inherits the desktop
             //and window station of its parent process. If this member is
@@ -104,15 +101,14 @@ namespace ImpersonationSystemService.WindowsApi
             if (result == false)
             {
                 int error = Marshal.GetLastWin32Error();
-                string message = string.Format("CreateProcessAsUser Error: {0}", error);
+                string message = String.Format("CreateProcessAsUser Error: {0}", error);
                 Debug.WriteLine(message);
             }
 
             return result;
         }
 
-
-        private static IntPtr GetPrimaryToken(int processId)
+        internal static IntPtr GetPrimaryToken(int processId)
         {
             IntPtr token = IntPtr.Zero;
             IntPtr primaryToken = IntPtr.Zero;
@@ -126,7 +122,7 @@ namespace ImpersonationSystemService.WindowsApi
 
             catch (ArgumentException)
             {
-                string details = string.Format("ProcessID {0} Not Available", processId);
+                string details = String.Format("ProcessID {0} Not Available", processId);
                 Debug.WriteLine(details);
                 throw;
             }
@@ -136,29 +132,29 @@ namespace ImpersonationSystemService.WindowsApi
             if (retVal == true)
             {
                 SecurityAttributes sa = new SecurityAttributes();
-                sa.nLength = (uint) Marshal.SizeOf(sa);
+                sa.nLength = (uint)Marshal.SizeOf(sa);
 
                 //Convert the impersonation token into Primary token
                 retVal = DuplicateTokenEx(
                     token,
                     TOKEN_ASSIGN_PRIMARY | TOKEN_DUPLICATE | TOKEN_QUERY,
                     ref sa,
-                    (int) SecurityImpersonationLevel.SecurityIdentification,
-                    (int) TokenType.TokenPrimary,
+                    (int)SecurityImpersonationLevel.SecurityIdentification,
+                    (int)TokenType.TokenPrimary,
                     ref primaryToken);
 
                 //Close the Token that was previously opened.
                 CloseHandle(token);
                 if (retVal == false)
                 {
-                    string message = string.Format("DuplicateTokenEx Error: {0}", Marshal.GetLastWin32Error());
+                    string message = String.Format("DuplicateTokenEx Error: {0}", Marshal.GetLastWin32Error());
                     Debug.WriteLine(message);
                 }
             }
 
             else
             {
-                string message = string.Format("OpenProcessToken Error: {0}", Marshal.GetLastWin32Error());
+                string message = String.Format("OpenProcessToken Error: {0}", Marshal.GetLastWin32Error());
                 Debug.WriteLine(message);
             }
 
@@ -166,7 +162,7 @@ namespace ImpersonationSystemService.WindowsApi
             return primaryToken;
         }
 
-        private static IntPtr GetEnvironmentBlock(IntPtr token)
+        internal static IntPtr GetEnvironmentBlock(IntPtr token)
         {
             IntPtr envBlock = IntPtr.Zero;
             bool retVal = CreateEnvironmentBlock(ref envBlock, token, false);
@@ -176,58 +172,11 @@ namespace ImpersonationSystemService.WindowsApi
                 //Will not be created if "false"
                 //It should not adversley affect CreateProcessAsUser.
 
-                string message = string.Format("CreateEnvironmentBlock Error: {0}", Marshal.GetLastWin32Error());
+                string message = String.Format("CreateEnvironmentBlock Error: {0}", Marshal.GetLastWin32Error());
                 Debug.WriteLine(message);
             }
 
             return envBlock;
-        }
-
-        /// <summary>
-        /// Executes a process using the process id of the first explorer process it finds.
-        /// </summary>
-        /// <param name="command">command to execute</param>
-        /// <returns></returns>
-        public static bool Launch(string command) => Launch(command, int.MinValue);
-
-        /// <summary>
-        /// Executes a process using the process id which is specified
-        /// </summary>
-        /// <param name="command">command to execute</param>
-        /// <param name="processId">id of process which is used to impersonate the command</param>
-        /// <returns></returns>
-        public static bool Launch(string command, int processId)
-        {
-            bool ret = false;
-
-            //Either specify the processID explicitly
-            //Or try to get it from a process owned by the user.
-            //In this case assuming there is only one explorer.exe
-            
-            if (processId < 0)
-                processId = GetExplorerProcessId();
-
-            if (processId > 1)
-            {
-                IntPtr token = GetPrimaryToken(processId);
-
-                if (token != IntPtr.Zero)
-                {
-                    IntPtr envBlock = GetEnvironmentBlock(token);
-                    ret = LaunchProcessAsUser(command, token, envBlock);
-                    if (envBlock != IntPtr.Zero)
-                        DestroyEnvironmentBlock(envBlock);
-
-                    CloseHandle(token);
-                }
-            }
-
-            return ret;
-        }
-
-        private static int GetExplorerProcessId()
-        {
-            return Process.GetProcessesByName("explorer").FirstOrDefault()?.Id ?? int.MinValue;
         }
     }
 }

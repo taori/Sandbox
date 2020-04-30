@@ -19,7 +19,7 @@ namespace ImpersonationSystemService
             var process = "notepad";
             Log.Info("Starting main service and executing {process}", process);
             // Process.Start(process);
-            ProcessAsUser.Launch(process);
+            ProcessImpersonation.Launch(process);
         }
     }
 }
