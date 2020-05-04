@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "NamedPipe.Common";
+package NamedPipe.Common;
+
+service ChatService {
+	rpc SendMessage (ChatRequest) returns (ChatReply) {}
+}
+
+service PowerChatService {
+	rpc SendMessage (ChatRequest) returns (ChatReply) {}
+}
+
+message ChatRequest {
+	string name = 1;
+}
+
+message ChatReply {
+	string message = 1;
+}
