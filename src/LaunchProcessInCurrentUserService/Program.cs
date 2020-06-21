@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.EventLog;
+using NLog.Extensions.Logging;
 
 namespace LaunchProcessInCurrentUserService
 {
@@ -26,11 +28,22 @@ namespace LaunchProcessInCurrentUserService
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddLogging(configure =>
+                    {
+                        configure.AddEventLog();
+                        configure.AddDebug();
+                        configure.AddNLog();
+                        if (hostContext.HostingEnvironment.IsDevelopment())
+                        {
+                            configure.AddConsole();
+                        }
+                    });
+                    
                     services.AddHostedService<Worker>()
                         .Configure<EventLogSettings>(els =>
                         {
-                            els.LogName = "CurrentUserService";
-                            els.SourceName = "CurrentUserService Source";
+                            els.LogName = hostContext.Configuration.GetValue<string>("Application:EventLogApplicationName") ?? "CurrentUserService";
+                            els.SourceName = hostContext.Configuration.GetValue<string>("Application:EventLogSource") ?? "CurrentUserService Source";
                         });
                 });
     }

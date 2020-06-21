@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ImpersonationSystemService.WindowsApi;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -19,10 +20,16 @@ namespace LaunchProcessInCurrentUserService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            ProcessImpersonation.Launch("notepad");
+            
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(5000, stoppingToken);
+                using (_logger.BeginScope("Worker cycle."))
+                {
+                    _logger.LogInformation(new EventId(1),"Cycle started {Time}", DateTimeOffset.Now);
+                    await Task.Delay(5000, stoppingToken);
+                    _logger.LogInformation(new EventId(1),"Cycle done.");
+                }
             }
         }
     }
