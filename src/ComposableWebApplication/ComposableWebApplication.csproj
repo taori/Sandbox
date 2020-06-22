@@ -13,6 +13,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\ComposableWebApplication.Plugin1\ComposableWebApplication.Plugin1.csproj" />
     <ProjectReference Include="..\ComposableWebApplication.SDK.Core\ComposableWebApplication.SDK.Core.csproj" />
     <ProjectReference Include="..\ComposableWebApplication.SDK.Web\ComposableWebApplication.SDK.Web.csproj" />
   </ItemGroup>

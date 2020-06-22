@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using ComposableWebApplication.Plugin1;
 using ComposableWebApplication.SDK.Core;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ComposableWebApplication.Plugin1
