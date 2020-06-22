@@ -167,7 +167,7 @@ namespace ODataAuthorization.OData.Infrastructure
 			if (result == 0)
 				return this.StatusCode((int)HttpStatusCode.NotModified);
 			if (result == 1)
-				return Created(linkGenerator.GetUriByAction(HttpContext, nameof(Get), $"{typeof(TEntity).Name}"), null);
+				return Created(new Uri(linkGenerator.GetUriByAction(HttpContext, nameof(Get), $"{typeof(TEntity).Name}")), null);
 
 			return this.BadRequest();
 		}

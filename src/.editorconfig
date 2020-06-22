@@ -1,0 +1,49 @@
+# Informationen zu EDITORCONFIG-Dateien finden Sie unter https://aka.ms/editorconfigdocs
+
+# All files
+[*]
+indent_style = tabs
+
+# Xml files
+
+# CA1822: Member Get does not access instance data and can be marked as static (Shared in VisualBasic)
+dotnet_diagnostic.CA1822.severity = none
+
+# CS1998: Bei der asynchronen Methode fehlen "await"-Operatoren. Die Methode wird synchron ausgeführt.
+dotnet_diagnostic.CS1998.severity = none
+
+# CA1801: Parameter id of method Put is never used. Remove the parameter or use it in the method body.
+dotnet_diagnostic.CA1801.severity = none
+
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = none
+
+# CS1030: #Warnungsdirektive
+dotnet_diagnostic.CS1030.severity = none
+
+# CA1720: Identifier contains type name
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1307: Specify StringComparison
+dotnet_diagnostic.CA1307.severity = none
+
+# CA1308: Normalize strings to uppercase
+dotnet_diagnostic.CA1308.severity = none
+
+# CA1819: Properties should not return arrays
+dotnet_diagnostic.CA1819.severity = none
+
+# CA1812: DefaultAuthorizationFactory is an internal class that is apparently never instantiated. If so, remove the code from the assembly. If this class is intended to contain only static members, make it static (Shared in Visual Basic).
+dotnet_diagnostic.CA1812.severity = none
+
+# CA1052: Static holder types should be Static or NotInheritable
+dotnet_diagnostic.CA1052.severity = none
+
+# CA1040: Avoid empty interfaces
+dotnet_diagnostic.CA1040.severity = none
+
+# CA1056: Uri properties should not be strings
+dotnet_diagnostic.CA1056.severity = none
+
+[*.xml]
+indent_size = 4
