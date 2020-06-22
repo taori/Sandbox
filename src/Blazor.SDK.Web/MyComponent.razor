@@ -1,0 +1,12 @@
+﻿<div>
+	<label>@LabelText defined in SDK.Web</label>
+	@ChildContent
+</div>
+
+@code {
+	[Parameter]
+	public string LabelText { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}
