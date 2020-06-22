@@ -1,0 +1,13 @@
+﻿@page "/Plugin1/MyPage/{Id}"
+<div class="my-component">
+	This is the content for @Id declared in Plugin1
+	<MyComponent LabelText="Just a test">
+		Does this render? Declared by Blazor.App
+	</MyComponent>
+</div>
+
+@code
+{
+	[Parameter]
+	public string Id { get; set; }
+}
