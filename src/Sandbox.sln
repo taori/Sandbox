@@ -36,12 +36,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{00233BBA-B124-497A-A09B-B9202899C71C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{97B7551C-E9AD-4E30-83CD-CF428848DE99}"
-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BE2A1D8-7EE0-4FFE-B94F-5F6DA10B2E92}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win32", "win32", "{89A21903-19E5-4E9E-81E3-1FBB932EE435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "win32access", "win32access\win32access.csproj", "{46DC2F84-7164-417F-8CA3-63C099E6E075}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +104,10 @@ Global
 		{E005FFA0-6DE7-470E-86ED-426B41E17B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E005FFA0-6DE7-470E-86ED-426B41E17B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E005FFA0-6DE7-470E-86ED-426B41E17B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46DC2F84-7164-417F-8CA3-63C099E6E075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DC2F84-7164-417F-8CA3-63C099E6E075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DC2F84-7164-417F-8CA3-63C099E6E075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DC2F84-7164-417F-8CA3-63C099E6E075}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +126,7 @@ Global
 		{2368995F-5EDA-4A13-A370-846200EC834B} = {D5293DB4-7DD6-4F18-9803-5FBFEF0F6B75}
 		{A4F3FD2A-6097-480A-A4E4-07AD64FAF60B} = {D5293DB4-7DD6-4F18-9803-5FBFEF0F6B75}
 		{E005FFA0-6DE7-470E-86ED-426B41E17B37} = {D5293DB4-7DD6-4F18-9803-5FBFEF0F6B75}
+		{46DC2F84-7164-417F-8CA3-63C099E6E075} = {89A21903-19E5-4E9E-81E3-1FBB932EE435}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9519F636-1DDF-464F-9BE2-FFFD51628E4F}
